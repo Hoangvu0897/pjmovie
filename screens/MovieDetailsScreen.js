@@ -1,10 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, Image, ScrollView } from 'react-native';
+import { getMovieDetails } from '../services/api';
 
-const MovieDetailsScreen = ({ route }) => {
-    const { movie } = route.params;
-    const { title, poster_path, vote_average, overview, release_date } = movie;
-    const imageUrl = `https://image.tmdb.org/t/p/w500${poster_path}`; // Thay bằng đường dẫn hình ảnh thích hợp
+const MovieDetailsScreen = ({ route, navigation }) => {
+    const { movieId } = route.params;
+    const [movieDetails, setMovieDetails] = useState(null);
+
+    useEffect(() => {
+        const fetchMovieDetails = async () => {
+            const details = await getMovieDetails(movieId);
+            setMovieDetails(details);
+        };
+
+        fetchMovieDetails();
+    }, [movieId]);
+
+    if (!movieDetails) {
+        return <Text>Loading...</Text>;
+    }
+
+    const { title, poster_path, vote_average, overview, release_date } = movieDetails;
+    const imageUrl = `https://image.tmdb.org/t/p/w500${poster_path}`;
 
     return (
         <ScrollView style={styles.container}>

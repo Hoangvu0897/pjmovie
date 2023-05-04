@@ -1,43 +1,47 @@
 import React from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
-
-const MovieCard = ({ movie, onPress }) => {
-    const { title, poster_path, vote_average } = movie;
-    const imageUrl = `https://image.tmdb.org/t/p/w500${poster_path}`; // Thay bằng đường dẫn hình ảnh thích hợp
+import { getImageUrl } from '../services/api';
+const MovieCard = ({ movie, onSelect, navigation }) => {
+    const handlePress = () => {
+        navigation.navigate('MovieDetailsScreen', { movieId: movie.id });
+    };
 
     return (
-        <TouchableOpacity style={styles.card} onPress={() => onPress(movie)}>
-            <Image source={{ uri: imageUrl }} style={styles.poster} resizeMode="cover" />
-            <View style={styles.details}>
-                <Text style={styles.title}>{title}</Text>
-                <Text style={styles.rating}>Rating: {vote_average}/10</Text>
+        <TouchableOpacity onPress={handlePress} style={styles.card}>
+            <View style={styles.imageContainer}>
+                <Image
+                    source={{ uri: getImageUrl(movie.poster_path) }}
+                    style={styles.image}
+                    resizeMode="cover"
+                />
             </View>
+            <Text onPress={handlePress} style={styles.title} numberOfLines={1}>
+                {movie.title}
+            </Text>
         </TouchableOpacity>
     );
 };
 
 const styles = StyleSheet.create({
     card: {
-        backgroundColor: '#FFF',
+        flex: 1,
+        margin: 5,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    imageContainer: {
+        width: 150,
+        height: 225,
         borderRadius: 10,
         overflow: 'hidden',
-        width: '80%',
-        marginBottom: 16,
     },
-    poster: {
+    image: {
         width: '100%',
-        height: 300,
-    },
-    details: {
-        padding: 10,
+        height: '100%',
     },
     title: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        marginBottom: 4,
-    },
-    rating: {
-        fontSize: 16,
+        marginTop: 8,
+        textAlign: 'center',
     },
 });
 
