@@ -4,7 +4,7 @@ import { getMovieDetails } from "../services/api";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import AuthContext from "../Auth/AuthContext";
 
-const MovieDetailsScreen = ({ route }) => {
+const MovieDetailsScreen = ({ route, navigation }) => {
   const { movieId } = route.params;
   const [movieDetails, setMovieDetails] = useState(null);
   const { addToFavorites } = useContext(AuthContext);
@@ -13,6 +13,7 @@ const MovieDetailsScreen = ({ route }) => {
     const fetchMovieDetails = async () => {
       const details = await getMovieDetails(movieId);
       setMovieDetails(details);
+      navigation.setOptions({ title: "Trang phim chi tiết" });
     };
 
     fetchMovieDetails();
@@ -51,7 +52,9 @@ const MovieDetailsScreen = ({ route }) => {
           style={styles.favoriteButton}
           onPress={handleAddToFavorites}
         >
-          <Text style={styles.favoriteButtonText}>Add to favorites</Text>
+          <Text style={styles.favoriteButtonText}>
+            Thêm vào Danh sách phim ưa thích
+          </Text>
         </TouchableOpacity>
       </View>
     </ScrollView>
@@ -116,5 +119,4 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
 });
-
 export default MovieDetailsScreen;

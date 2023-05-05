@@ -17,7 +17,6 @@ const LoginScreen = ({ navigation }) => {
 
   const handleLogin = async () => {
     try {
-      // Sửa dòng này để sử dụng hàm signIn từ AuthContext
       const success = await signIn({ email, password });
       if (success) {
         navigation.navigate("UserProfile");

@@ -33,7 +33,11 @@ const App = () => {
             <CustomDrawerContent {...props} genres={genres} />
           )}
         >
-          <Drawer.Screen name="Home" component={HomeScreen} />
+          <Drawer.Screen
+            name="Home"
+            component={HomeScreen}
+            options={{ title: "Trang Chủ" }}
+          />
           <Drawer.Screen
             name="MovieDetailsScreen"
             component={MovieDetailsScreen}
@@ -41,22 +45,22 @@ const App = () => {
           <Drawer.Screen
             name="Login"
             component={LoginScreen}
-            options={{ drawerLabel: () => null }}
+            options={{ drawerLabel: () => null, title: "Trang Đăng Nhập" }}
           />
           <Drawer.Screen
             name="Register"
             component={RegisterScreen}
-            options={{ drawerLabel: () => null }}
+            options={{ drawerLabel: () => null, title: "Trang Đăng Ký" }}
           />
           <Drawer.Screen
             name="GenreMoviesScreen"
             component={GenreMoviesScreen}
-            options={{ drawerLabel: () => null }}
+            options={{ drawerLabel: () => null, title: "Phim Theo Thể Loại" }}
           />
           <Drawer.Screen
             name="UserProfile"
             component={UserProfileScreen}
-            options={{ drawerLabel: () => null }}
+            options={{ drawerLabel: () => null, title: "Thông Tin Người Dùng" }}
           />
         </Drawer.Navigator>
       </NavigationContainer>

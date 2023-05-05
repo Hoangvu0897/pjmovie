@@ -38,7 +38,7 @@ const UserProfileScreen = () => {
       <Text style={styles.userInfo}>
         Email: {user.email}
         {"\n"}
-        Mật khẩu: {user.password} {/* Lưu ý: không nên hiển thị mật khẩu */}
+        Mật khẩu: {user.password}
       </Text>
       <Text style={styles.favoriteMoviesTitle}>Các bộ phim yêu thích:</Text>
       <FlatList

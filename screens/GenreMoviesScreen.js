@@ -11,6 +11,7 @@ const GenreMoviesScreen = ({ route, navigation }) => {
     const fetchMoviesByGenre = async () => {
       const moviesByGenre = await getMoviesByGenre(genreId);
       setMovies(moviesByGenre);
+      navigation.setOptions({ title: "Phim Theo Thể Loại" });
     };
 
     fetchMoviesByGenre();
